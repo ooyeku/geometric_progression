@@ -9,13 +9,19 @@ func main() {
 	x = 4
 	fmt.Println(x)
 	fmt.Println(geoProgSum(f, l, r))
-	var geoProg = buildGeoProgression(3, 4, 15)
+	var geoProg = buildGeoProgression(3, 4, 12)
 	fmt.Println(Last(geoProg))
 	var l, _ = Last(geoProg)
 	var sumOfSlice = geoProgSum(4, l, 3)
 	fmt.Println(sumOfSlice) // sum of all numbers in slice
 	fmt.Println(geoProg)    // original slice
 	fmt.Println(First(geoProg))
+
+	var a = 3
+	var b = 7
+	a, b = Swap(a, b)
+	fmt.Println(a) // should now be 7
+	fmt.Println(b) // should now be 3
 }
 
 // Geo set sum implementation
@@ -64,4 +70,11 @@ func First[E any](s []E) (E, bool) {
 		return zero, false
 	}
 	return s[0], true
+}
+
+// Swap accepts two integer values and returns the two values in reversed order (thereby swapping the position of the two variables)
+func Swap(x int, y int) (int, int) {
+	var newX = y
+	var newY = x
+	return newX, newY
 }
