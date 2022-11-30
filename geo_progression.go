@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // TODO create arguments for main function to make program callable
 func main() {
@@ -22,6 +24,12 @@ func main() {
 	a, b = Swap(a, b)
 	fmt.Println(a) // should now be 7
 	fmt.Println(b) // should now be 3
+
+	sl := make([]int, 0, 8)
+	sl = append(sl, 34, 8, 7, 56, 467, 73, 3, 1)
+	var sorted = BubbleSort(sl)
+	fmt.Println(sorted)
+	fmt.Println(len(sl))
 }
 
 // Geo set sum implementation
@@ -77,4 +85,17 @@ func Swap(x int, y int) (int, int) {
 	var newX = y
 	var newY = x
 	return newX, newY
+}
+
+// BubbleSort accepts a slices of any length and sorts the integer variables from smallest to biggest
+func BubbleSort(array []int) []int {
+	n := len(array)
+	for i := 0; i < n; i++ {
+		for j := 0; j < n-1; j++ {
+			if array[j] > array[j+1] {
+				array[j], array[j+1] = Swap(array[j], array[j+1])
+			}
+		}
+	}
+	return array
 }
