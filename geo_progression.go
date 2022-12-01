@@ -30,6 +30,7 @@ func main() {
 	var sorted = BubbleSort(sl)
 	fmt.Println(sorted)
 	fmt.Println(len(sl))
+	FindSortedIndex(73, sorted) // binary search for the number 7 in sorted array
 }
 
 // Geo set sum implementation
@@ -98,4 +99,23 @@ func BubbleSort(array []int) []int {
 		}
 	}
 	return array
+}
+
+// FindSortedIndex prints the index of a specified value (v) and  integer array (array) and returns the index of that value
+func FindSortedIndex(v int, array []int) {
+	n := len(array)
+	a := 0
+	b := n - 1
+
+	for a < b {
+		k := (a + b) / 2
+		if array[k] == v {
+			fmt.Println(k)
+		}
+		if array[k] > v {
+			b = k - 1
+		} else {
+			a = k + 1
+		}
+	}
 }
