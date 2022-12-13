@@ -31,6 +31,7 @@ func main() {
 	fmt.Println(sorted)
 	fmt.Println(len(sl))
 	FindSortedIndex(73, sorted) // binary search for the number 7 in sorted array
+	listElement(sorted)
 }
 
 // Geo set sum implementation
@@ -106,7 +107,6 @@ func FindSortedIndex(v int, array []int) {
 	n := len(array)
 	a := 0
 	b := n - 1
-
 	for a < b {
 		k := (a + b) / 2
 		if array[k] == v {
@@ -118,4 +118,12 @@ func FindSortedIndex(v int, array []int) {
 			a = k + 1
 		}
 	}
+}
+
+// listElement returns the element of the specified array, one element per line.
+func listElement(array []int) {
+	for i := 0; i < len(array); i++ {
+		fmt.Println(array[i])
+	}
+	return
 }
