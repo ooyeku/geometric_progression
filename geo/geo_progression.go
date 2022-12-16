@@ -179,4 +179,15 @@ func main() {
 	sorted = deleteEleIndex(sorted, 3)
 	sorted = BubbleSort(sorted)
 	fmt.Println(sorted)
+
+	row := makeRowValues(sorted)
+	fmt.Println(row[0].value)
+	fmt.Println(row[0].position, "\n", len(row))
+
+	//empty = make([]int, len(sl)+1)
+	sl = append(sl, 55)
+	fmt.Println(sl)
+	row2 := makeRowValues(sl)
+	fmt.Println(row2[8].value)
+	fmt.Println(row2[8].position, "\n", len(row2))
 }
