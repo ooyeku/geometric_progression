@@ -4,36 +4,6 @@ import (
 	"fmt"
 )
 
-// TODO create arguments for main function to make program callable
-func main() {
-	fmt.Println("Go get it kiddo")
-	var x int
-	x = 4
-	fmt.Println(x)
-	fmt.Println(geoProgSum(f, l, r))
-	var geoProg = buildGeoProgression(3, 4, 12)
-	fmt.Println(Last(geoProg))
-	var l, _ = Last(geoProg)
-	var sumOfSlice = geoProgSum(4, l, 3)
-	fmt.Println(sumOfSlice) // sum of all numbers in slice
-	fmt.Println(geoProg)    // original slice
-	fmt.Println(First(geoProg))
-
-	var a = 3
-	var b = 7
-	a, b = Swap(a, b)
-	fmt.Println(a) // should now be 7
-	fmt.Println(b) // should now be 3
-
-	sl := make([]int, 0, 8)
-	sl = append(sl, 34, 8, 7, 56, 467, 73, 3, 1)
-	var sorted = BubbleSort(sl)
-	fmt.Println(sorted)
-	fmt.Println(len(sl))
-	FindSortedIndex(73, sorted) // binary search for the number 7 in sorted array
-	listElement(sorted)
-}
-
 // Geo set sum implementation
 var r = 5 // ratio
 var f = 4 // first in set
@@ -42,8 +12,8 @@ var f2 = nextInSet(f1, r)
 var f3 = nextInSet(f2, r)
 var l = nextInSet(f3, r)
 
-// geoProgSum returns the sum of all elements in a geometric progression slice
-func geoProgSum(start int, last int, ratio int) int {
+// geoProSum returns the sum of all elements in a geometric progression slice
+func geoProSum(start int, last int, ratio int) int {
 	return ((last * ratio) - start) / (ratio - 1)
 }
 
@@ -126,4 +96,87 @@ func listElement(array []int) {
 		fmt.Println(array[i])
 	}
 	return
+}
+
+// appendListElement append a value to the end of the array
+func appendListElement(array []int, value int) []int {
+	var length = len(array)
+	var temp = make([]int, length+1)
+
+	for i := 0; i < length; i++ {
+		temp[i] = array[i]
+	}
+	temp[length] = value
+	return temp
+}
+
+func insertEleIndex(array []int, length int, temp []int, value int, insertIndex int) []int {
+	for i := 0; i < length; i++ {
+		if i < insertIndex {
+			temp[i] = array[i]
+		} else {
+			temp[i+1] = array[i]
+		}
+	}
+	temp[insertIndex] = value // Insert value to insertIndex of new array
+	return temp
+}
+
+func deleteEleIndex(array []int, index int) []int {
+	var length = len(array)
+	var temp = make([]int, length-1) // New array with size 1 smaller
+	for i := 0; i < length; i++ {
+		if i < index {
+			// values before index to be deleted go get copied to new array
+			temp[i] = array[i]
+		}
+		if i > index {
+			// values after index to be deleted get copied to new array  index - 1
+			temp[i-1] = array[i]
+		}
+	}
+	return temp
+}
+
+// TODO create arguments for main function to make program callable
+func main() {
+	fmt.Println("Go get it kiddo")
+	var x int
+	x = 4
+	fmt.Println(x)
+	fmt.Println(geoProSum(f, l, r))
+	var geoPro = buildGeoProgression(3, 4, 12)
+	fmt.Println(Last(geoPro))
+	var l, _ = Last(geoPro)
+	var sumOfSlice = geoProSum(4, l, 3)
+	fmt.Println(sumOfSlice) // sum of all numbers in slice
+	fmt.Println(geoPro)     // original slice
+	fmt.Println(First(geoPro))
+
+	var a = 3
+	var b = 7
+	a, b = Swap(a, b)
+	fmt.Println(a) // should now be 7
+	fmt.Println(b) // should now be 3
+
+	sl := make([]int, 0, 8)
+	sl = append(sl, 34, 8, 7, 56, 467, 73, 3, 1)
+	var sorted = BubbleSort(sl)
+	fmt.Println(sorted)
+	fmt.Println(len(sl))
+	FindSortedIndex(73, sorted) // binary search for the number 6 in sorted array
+	listElement(sorted)
+	sorted = appendListElement(sorted, r*len(sorted))
+	listElement(sorted)
+	fmt.Println(geoProSum(sorted[0], sorted[len(sorted)-1], r)) // sorted is no longer a geometric progression so sum is not accurate
+	sortedLen := len(sorted)
+	var empty = make([]int, sortedLen+1)                     // initialied empy list created for insertEleIndex must be one bigger
+	sorted = insertEleIndex(sorted, sortedLen, empty, 12, 3) // add 12 for first index of sorted
+	listElement(sorted)
+	fmt.Println(sorted)
+	sorted = BubbleSort(sorted)
+	fmt.Println(sorted)
+	sorted = deleteEleIndex(sorted, 3)
+	sorted = BubbleSort(sorted)
+	fmt.Println(sorted)
 }
