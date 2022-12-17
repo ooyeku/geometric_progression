@@ -1,4 +1,4 @@
-package main
+package geo_workshop
 
 type Column struct {
 	size   int         // how many rows the colum has
@@ -9,6 +9,22 @@ type Column struct {
 type RowValues struct {
 	position int // index of value in row
 	value    any
+
+	// used for sorting
+	//sortKey string
+	//sortAsc bool
+
+	// used for filtering
+	//filterKey string
+	//filterVal string
+
+	// used for grouping
+	//groupKey string
+	//groupAsc bool
+
+	// used for grouping
+	//groupSortKey string
+	//groupSortAsc bool
 }
 
 type Table struct {
