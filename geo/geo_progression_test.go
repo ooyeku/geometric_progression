@@ -4,6 +4,7 @@ import (
 	//"fmt"
 	//"regexp"
 	"testing"
+	//    "os"
 )
 
 // TestGeoProgSum create first last and ratio to
@@ -20,7 +21,7 @@ func TestGeoProgSum(t *testing.T) {
 
 // TestBuildGeoProgression creates a geometric progression based on size
 // ratio and starting variable and uses GeoProSum to test that return value
-// reuturns the summary of the array
+// returns the summary of the array
 func TestBuildGeoProgression(t *testing.T) {
 	s := 1
 	r := 2
@@ -31,6 +32,7 @@ func TestBuildGeoProgression(t *testing.T) {
 	}
 }
 
+// TestLast tests that last value in array is returned when Last function is called
 func TestLast(t *testing.T) {
 	s := 1
 	r := 2
@@ -39,5 +41,62 @@ func TestLast(t *testing.T) {
 	l, _ := Last(a)
 	if l != 16 {
 		t.Errorf("Expected %d, got %d", 16, l)
+	}
+}
+
+// TestFirst tests that first value in array is returned when First function is called
+func TestFirst(t *testing.T) {
+	s := 1
+	r := 2
+	size := 5
+	p := BuildGeoProgression(s, r, size)
+	f, _ := First(p)
+	if f != s {
+		t.Errorf("Expected %d, got %d", s, f)
+	}
+}
+
+// TestBubbleSort tests that BubbleSort function returns correct first and last variables
+func TestBubbleSort(t *testing.T) {
+	a := make([]int, 0, 8)
+	a = append(a, 34, 888, 7, 56, 467, 73, 3, 1)
+	sort := BubbleSort(a)
+	first, _ := First(sort)
+	last, _ := Last(sort)
+	if first != 1 {
+		t.Errorf("Expected %d, got %d", 1, first)
+	}
+	if last != 888 {
+		t.Errorf("Expected %d, got %d", 888, last)
+	}
+}
+
+//func TestFindSortedIndex(t *testing.T){
+//    a := make([]int, 0, 8)
+//    a = append(a, 55, 43, 8, 5, 22, 5)
+//     use os.Pipe to transer println output to other input
+//    reader, writer, err := os.Pipe()
+//    if err != nil {
+//        panic(err)
+//    }
+//    os.Stdout = writer
+//    os.Stderr = writer
+//    log.SetOutput(writer)
+//    out := make(chan string)
+//    go func()
+//    FindSortedIndex(43, a)
+//
+//}
+
+// func TestListElement(array[]int)
+
+// TestAppendListElement tests AppendListElement function to insert and retrieve value into the END of array
+func TestAppendListElement(t *testing.T) {
+	a := make([]int, 0, 8)
+	a = append(a, 34, 888, 7, 56, 467, 73, 3, 1)
+	an := AppendListElement(a, 12)
+	last, _ := Last(an)
+	if last != 12 {
+		t.Errorf("Expected %d, got %d", 12, an)
 	}
 }

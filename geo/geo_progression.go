@@ -91,7 +91,7 @@ func FindSortedIndex(v int, array []int) {
 }
 
 // listElement returns the element of the specified array, one element per line.
-func listElement(array []int) {
+func ListElement(array []int) {
 	for i := 0; i < len(array); i++ {
 		fmt.Println(array[i])
 	}
@@ -99,7 +99,7 @@ func listElement(array []int) {
 }
 
 // appendListElement append a value to the end of the array
-func appendListElement(array []int, value int) []int {
+func AppendListElement(array []int, value int) []int {
 	var length = len(array)
 	var temp = make([]int, length+1)
 
@@ -110,7 +110,7 @@ func appendListElement(array []int, value int) []int {
 	return temp
 }
 
-func insertEleIndex(array []int, length int, temp []int, value int, insertIndex int) []int {
+func InsertEleIndex(array []int, length int, temp []int, value int, insertIndex int) []int {
 	for i := 0; i < length; i++ {
 		if i < insertIndex {
 			temp[i] = array[i]
