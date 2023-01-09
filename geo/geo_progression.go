@@ -9,6 +9,15 @@ func GeoProSum(start int, last int, ratio int) int {
 	return ((last * ratio) - start) / (ratio - 1)
 }
 
+// ManualProgSum manually add all values inside an array
+func ManualProgSum(array []int) int {
+	var sum int
+	for i := 0; i <= len(array)-1; i++ {
+		sum = array[i] + sum
+	}
+	return sum
+}
+
 // nextInSet returns next element in geometric progression set given an element and the set ratio
 func nextInSet(x int, ratio int) int {
 	// input previous number in set, returns next
@@ -171,8 +180,24 @@ func main() {
 	fmt.Println("...........................New Geo:.................................")
 	newGeo := BuildGeoProgression(geo[16111], 3, 12)
 	ListElement(newGeo)
+	f, _ = First(newGeo)
+	l, _ = Last(newGeo)
+	fmt.Print("GeoProgSum: ")
+	// check geo progression sum vs manual prog sum
+	fmt.Println(GeoProSum(f, l, 3))
+	fmt.Println("ManualProgSum: ")
+	fmt.Println(ManualProgSum(newGeo))
+	fmt.Println(GeoProSum(f, l, 3) == ManualProgSum(newGeo))
 	fmt.Println("...........................New Geo Sorted:..........................")
 	ListElement(BubbleSort(newGeo))
 	fmt.Print("  Index of -623760337690389935: ")
 	fmt.Print(FindSortedIndex(-623760337690389935, newGeo))
+	// Checking whether both Geometric Progression Summary functions (Geo and Man) produce the same
+	// results after the array is sorted
+	fmt.Println("")
+	fmt.Print("Sorted GeoProgSum: ")
+	fmt.Println(GeoProSum(f, l, 3))
+	fmt.Print("Sorted ManualProgSum: ")
+	fmt.Println(ManualProgSum(newGeo))
+	fmt.Println(GeoProSum(f, l, 3) == ManualProgSum(newGeo))
 }
