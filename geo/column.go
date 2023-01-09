@@ -1,4 +1,4 @@
-package geo_workshop
+package main
 
 type Column struct {
 	size   int         // how many rows the colum has

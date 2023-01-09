@@ -1,3 +1,3 @@
-module geo_workshop
+module gworkshop
 
 go 1.19

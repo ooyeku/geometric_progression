@@ -1,4 +1,4 @@
-package geo_workshop
+package main
 
 import (
 	//"fmt"
