@@ -4,13 +4,6 @@ import (
 	"fmt"
 )
 
-// Geo set sum implementation
-var r = 5 // ratio
-var f = 4 // first in set
-var f1 = nextInSet(f, r)
-var f2 = nextInSet(f1, r)
-var f3 = nextInSet(f2, r)
-
 // GeoProSum returns the sum of all elements in a geometric progression slice
 func GeoProSum(start int, last int, ratio int) int {
 	return ((last * ratio) - start) / (ratio - 1)
@@ -72,14 +65,17 @@ func BubbleSort(array []int) []int {
 }
 
 // FindSortedIndex prints the index of a specified value (v) and  integer array (array) and returns the index of that value
-func FindSortedIndex(v int, array []int) {
+func FindSortedIndex(v int, array []int) int {
+	array = BubbleSort(array) // auto sort
 	n := len(array)
 	a := 0
 	b := n - 1
+	var out int
 	for a < b {
 		k := (a + b) / 2
 		if array[k] == v {
-			fmt.Println(k)
+			out = k
+			return out
 		}
 		if array[k] > v {
 			b = k - 1
@@ -87,6 +83,7 @@ func FindSortedIndex(v int, array []int) {
 			a = k + 1
 		}
 	}
+	return out
 }
 
 // ListElement listElement returns the element of the specified array, one element per line.
@@ -109,8 +106,10 @@ func AppendListElement(array []int, value int) []int {
 	return temp
 }
 
-func InsertEleIndex(array []int, length int, temp []int, value int, insertIndex int) []int {
-	for i := 0; i < length; i++ {
+// InsertEleIndex inserts a value into a defined index of an array
+func InsertEleIndex(array []int, value int, insertIndex int) []int {
+	temp := make([]int, len(array)+1)
+	for i := 0; i < len(array); i++ {
 		if i < insertIndex {
 			temp[i] = array[i]
 		} else {
@@ -121,6 +120,7 @@ func InsertEleIndex(array []int, length int, temp []int, value int, insertIndex 
 	return temp
 }
 
+// deleteEleIndex removes element at specified index from an array
 func deleteEleIndex(array []int, index int) []int {
 	var length = len(array)
 	var temp = make([]int, length-1) // New array with size 1 smaller
@@ -161,4 +161,18 @@ func main() {
 	l, _ := Last(geo)
 	f, l = Swap(f, l)
 	fmt.Println(f, l)
+
+	geo = InsertEleIndex(geo, 12, len(geo)) // insert 12 into the end of geo
+	ListElement(geo)                        // expect 12 as last element
+	fmt.Println(FindSortedIndex(12, geo))
+	fmt.Println(FindSortedIndex(1947565889352462393, geo)) // no value
+	fmt.Println(FindSortedIndex(216396209928051377, geo))
+
+	fmt.Println("...........................New Geo:.................................")
+	newGeo := BuildGeoProgression(geo[16111], 3, 12)
+	ListElement(newGeo)
+	fmt.Println("...........................New Geo Sorted:..........................")
+	ListElement(BubbleSort(newGeo))
+	fmt.Print("  Index of -623760337690389935: ")
+	fmt.Print(FindSortedIndex(-623760337690389935, newGeo))
 }
