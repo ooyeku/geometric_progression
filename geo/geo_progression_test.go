@@ -100,3 +100,40 @@ func TestAppendListElement(t *testing.T) {
 		t.Errorf("Expected %d, got %d", 12, an)
 	}
 }
+
+func TestInsertEleIndex(t *testing.T) {
+	geo := BuildGeoProgression(1, 2, 10)
+	geo = InsertEleIndex(geo, 44, 3)
+	check := geo[3]
+	if check != 44 {
+		t.Errorf("Expected %d, got %d", 44, check)
+	}
+}
+
+func TestDeleteEleIndex(t *testing.T) {
+	geo := BuildGeoProgression(1, 2, 10)
+	geo = deleteEleIndex(geo, 0)
+	check := geo[0]
+	if check == 1 {
+		t.Errorf("Expected element at first index to not be 1")
+	}
+}
+
+func TestShuffleOneLeft(t *testing.T) {
+	geo := BuildGeoProgression(1, 4, 3)
+	geo = ShuffleOneLeft(geo)
+	check := geo[0]
+	if check != 4 {
+		t.Errorf("Expected %d, got %d", 4, check)
+	}
+}
+
+func TestManualProgSum(t *testing.T) {
+	geo := BuildGeoProgression(1, 2, 18)
+	l, _ := Last(geo)
+	auto := GeoProSum(1, l, 2)
+	check := ManualProgSum(geo)
+	if check != auto {
+		t.Errorf("Expected %d, got %d", auto, check)
+	}
+}

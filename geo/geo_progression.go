@@ -146,8 +146,8 @@ func deleteEleIndex(array []int, index int) []int {
 	return temp
 }
 
-// shuffleOneLeft accepts an integer array and returns all elements shifted one index to the left
-func shuffleOneLeft(array []int) []int {
+// ShuffleOneLeft accepts an integer array and returns all elements shifted one index to the left
+func ShuffleOneLeft(array []int) []int {
 	// shuffles all values 1 position to the left
 	for i := 0; i < len(array)-1; i++ {
 		array[i], array[i+1] = Swap(array[i], array[i+1])
@@ -158,7 +158,7 @@ func shuffleOneLeft(array []int) []int {
 func main() {
 	geo := BuildGeoProgression(1, 9, 31555)
 	fmt.Println(GeoProSum(geo[0], geo[29], 7))
-	fmt.Println(shuffleOneLeft(geo))
+	fmt.Println(ShuffleOneLeft(geo))
 	del := deleteEleIndex(geo, 0)
 	fmt.Println(del)
 	geo = AppendListElement(del, 77)
